@@ -1,15 +1,15 @@
 package com.medicine.Entity;
 
-public class user {
+public class User {
     private int id;
     private String username;
     private String password;
     private boolean type;
 
-    public user() {
+    public User() {
     }
 
-    public user(int id, String username, String password, boolean type) {
+    public User(int id, String username, String password, boolean type) {
         this.id = id;
         this.username = username;
         this.password = password;
