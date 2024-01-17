@@ -1,6 +1,5 @@
-package com.medecine.Util.medecine.Mapper.imp;
-
-import com.medecine.Util.medecine.Entity.user;
+package com.medicine.Mapper.imp;
+import com.medicine.Entity.user;
 
 public interface userImp {
     boolean insert(user u);

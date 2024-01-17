@@ -1,4 +1,4 @@
-package com.medecine.Util.medecine.Util;
+package com.medicine.Util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

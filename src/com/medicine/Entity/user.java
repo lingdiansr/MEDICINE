@@ -1,4 +1,4 @@
-package com.medecine.Util.medecine.Entity;
+package com.medicine.Entity;
 
 public class user {
     private int id;

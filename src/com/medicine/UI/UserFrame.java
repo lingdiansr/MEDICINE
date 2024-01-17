@@ -1,4 +1,4 @@
-package com.medecine.ui.user;
+package com.medicine.UI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +25,7 @@ public class UserFrame extends JFrame {
 
     }
     private void initFrame(){
-        this.setTitle("µÇÂ¼");
+        this.setTitle("ï¿½ï¿½Â¼");
         this.setSize(800,500);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -36,19 +36,19 @@ public class UserFrame extends JFrame {
         this.setContentPane(panel);
         this.setLayout(null);
 
-        titleLabel=new JLabel("Ò½Ò©¹ÜÀíÏµÍ³",SwingConstants.CENTER);
+        titleLabel=new JLabel("Ò½Ò©ï¿½ï¿½ï¿½ï¿½ÏµÍ³",SwingConstants.CENTER);
         titleLabel.setForeground(Color.BLUE);
-        titleLabel.setFont(new Font("ËÎÌå",Font.PLAIN,30));
+        titleLabel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.PLAIN,30));
         titleLabel.setSize(800,100);
 
-        usernameLabel=new JLabel("ÓÃ»§Ãû");
+        usernameLabel=new JLabel("ï¿½Ã»ï¿½ï¿½ï¿½");
         usernameLabel.setForeground(new Color(0xFF0000));
-        usernameLabel.setFont(new Font("ËÎÌå",Font.PLAIN,30));
+        usernameLabel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.PLAIN,30));
         usernameLabel.setBounds(200,160,200,100);
 
-        passwordLabel=new JLabel("ÃÜÂë");
+        passwordLabel=new JLabel("ï¿½ï¿½ï¿½ï¿½");
         passwordLabel.setForeground(new Color(0xFF0000));
-        passwordLabel.setFont(new Font("ËÎÌå",Font.PLAIN,30));
+        passwordLabel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.PLAIN,30));
         passwordLabel.setBounds(200,160,200,100);
 
         panel.add(titleLabel);
@@ -56,28 +56,28 @@ public class UserFrame extends JFrame {
         panel.add(passwordLabel);
 
         usernameField =new JTextField(20);
-        usernameField.setFont(new Font("ËÎÌå",Font.PLAIN,18));
+        usernameField.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.PLAIN,18));
         usernameField.setSelectedTextColor(new Color(0xFF0000));
         usernameField.setBounds(330,132,280,40);
 
         passwordField =new JPasswordField(20);
-        passwordField.setFont(new Font("ËÎÌå",Font.PLAIN,18));
+        passwordField.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.PLAIN,18));
         passwordField.setSelectedTextColor(new Color(0xFF0000));
         passwordField.setBounds(330,192,200,40);
 
         panel.add(usernameField);
         panel.add(passwordField);
 
-        loginButton =new JButton("µÇÂ¼");
-        registerButton =new JButton("×¢²á");
+        loginButton =new JButton("ï¿½ï¿½Â¼");
+        registerButton =new JButton("×¢ï¿½ï¿½");
         loginButton.setForeground(Color.BLUE);
-        loginButton.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+        loginButton.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.PLAIN,20));
         loginButton.setBorderPainted(false);
         loginButton.setBounds(270,300,100,50);
 
-        registerButton =new JButton("×¢²á");
+        registerButton =new JButton("×¢ï¿½ï¿½");
         registerButton.setForeground(Color.BLUE);
-        registerButton.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+        registerButton.setFont(new Font("ï¿½ï¿½ï¿½ï¿½",Font.PLAIN,20));
         registerButton.setBorderPainted(false);
         registerButton.setBounds(270,300,100,50);
 

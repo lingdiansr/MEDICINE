@@ -1,5 +1,5 @@
 
-package com.medecine.Entity;
+package com.medicine.Entity;
 
 import java.util.Date;
 
