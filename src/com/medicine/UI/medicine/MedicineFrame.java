@@ -2,8 +2,10 @@ package com.medicine.UI.medicine;
 
 import com.eltima.components.ui.DatePicker;
 import com.medicine.Entity.Category;
+import com.medicine.Entity.Medicine;
 import com.medicine.UI.base.UIConstants;
 import com.medicine.UI.base.UIConverter;
+import com.medicine.Query.MedicineQuery;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -251,23 +253,34 @@ public class MedicineFrame extends JFrame {
             tableModel = null;
         }
         // todo 查询药品列表
-//        MedicineQuery medicineQuery = getMedicineQuery();
-
+        MedicineQuery medicineQuery = getMedicineQuery();
+        Medicine[] medicines = medicineQuery.executeQuety();
         // todo 查询分类列表
 
         // 赋值给tablemodel
 //        tableModel = UIConverter.getMedicineData(medicines, categories);
     }
 
-//    private MedicineQuery getMedicineQuery() {
-//        // TODO 一些过滤条件 , 价格的简单判断
-//
-////        return MedicineQuery.from(medicineNameStr, medicineMinPriceStr, medicineMaxPriceStr, categoryId, datePickStr);
+    private MedicineQuery getMedicineQuery() {
+        // TODO 一些过滤条件 , 价格的简单判断
+        String medicineNameStr = this.medicineName.getText();
+        String medicineMinPriceStr= this.medicineMinPrice.getText();
+        String medicineMaxPriceStr=this.medicineMaxPrice.getText();
+        String categoryId= (String) this.medicineCategory.getSelectedItem();
+        String datePickStr = this.datePick.getText();
+
+
+        return MedicineQuery.from(medicineNameStr, medicineMinPriceStr, medicineMaxPriceStr,categoryId, datePickStr);
 //        return null;
-//    }
+    }
 
     private void clearMedicineQuery() {
         // todo 清除查询条件
+        medicineName=UIConverter.initTextField();
+        medicineMinPrice=UIConverter.initTextField();
+        medicineMaxPrice=UIConverter.initTextField();
+        medicineCategory=initCategoryData(true);
+        datePick=UIConverter.getDatePicker(dealDate(true));
     }
 
     public static void main(String[] args) {
