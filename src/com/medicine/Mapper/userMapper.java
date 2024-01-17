@@ -1,10 +1,11 @@
 package com.medicine.Mapper;
 import com.medicine.Entity.User;
 
+import java.util.List;
+
 public interface userMapper {
     boolean insert(User u);
     boolean delete(User u);
     boolean update(User u);
-    User[] select(String key);
-
+    List<User> select(User u);
 }
