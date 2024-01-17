@@ -1,6 +1,6 @@
-package com.medicine.Mapper.imp;
+package com.medicine.Mapper;
 import com.medicine.Entity.Medicine;
-public interface medicineImp {
+public interface medicineMapper {
     boolean insert(Medicine m);
     boolean delete(Medicine m);
     boolean update(Medicine m);

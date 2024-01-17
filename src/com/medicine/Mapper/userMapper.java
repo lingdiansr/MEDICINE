@@ -1,7 +1,7 @@
-package com.medicine.Mapper.imp;
+package com.medicine.Mapper;
 import com.medicine.Entity.User;
 
-public interface userImp {
+public interface userMapper {
     boolean insert(User u);
     boolean delete(User u);
     boolean update(User u);
