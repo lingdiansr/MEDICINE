@@ -6,7 +6,7 @@ import com.medicine.Util.JDBCHelper;
 
 import java.util.List;
 
-public class userMapperImp implements userMapper {
+public class UserMapperImp implements userMapper {
     private static final JDBCHelper jdbc = new JDBCHelper();
 
     @Override

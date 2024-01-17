@@ -6,7 +6,7 @@ import com.medicine.Util.JDBCHelper;
 
 import java.util.List;
 
-public class categoryMapperImp implements categoryMapper {
+public class CategoryMapperImp implements categoryMapper {
     private static final JDBCHelper jdbc = new JDBCHelper();
 
     @Override
