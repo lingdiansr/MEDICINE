@@ -27,7 +27,7 @@ public class userMapperImp implements userMapper {
     public boolean update(User u) {
         String sql = "UPDATE user SET password=? and type=? WHERE username= ?";
         String[] values = new String[]{u.getPassword(), String.valueOf(u.isType()), u.getUsername()};
-        return false;
+        return jdbc.update(sql,values)>0;
     }
 
     @Override
