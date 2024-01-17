@@ -3,7 +3,6 @@ package com.medicine.UI.base;
 import com.eltima.components.ui.DatePicker;
 import com.medicine.Entity.Medicine;
 import com.medicine.Entity.Category;
-//import com.openvalley.server.entity.Medicine;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

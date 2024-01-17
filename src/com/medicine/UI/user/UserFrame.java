@@ -1,4 +1,4 @@
-package com.medicine.UI;
+package com.medicine.UI.user;
 import com.medicine.Service.UserFrameListener;
 
 import javax.swing.*;

@@ -3,7 +3,7 @@ import com.medicine.Entity.User;
 import com.medicine.Mapper.imp.UserMapperImp;
 import com.medicine.Mapper.UserMapper;
 
-import com.medicine.UI.UserFrame;
+import com.medicine.UI.user.UserFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

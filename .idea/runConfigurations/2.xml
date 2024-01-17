@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="UserFrame" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="com.medicine.UI.UserFrame" />
+  <configuration default="false" name="药品" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.medicine.UI.medicine.MedicineFrame" />
     <module name="MEDICINE" />
     <method v="2">
       <option name="Make" enabled="true" />
