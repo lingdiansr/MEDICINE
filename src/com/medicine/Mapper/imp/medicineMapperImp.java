@@ -1,7 +1,9 @@
 package com.medicine.Mapper.imp;
 
+import com.medicine.Entity.Category;
 import com.medicine.Entity.Medicine;
 import com.medicine.Mapper.medicineMapper;
+import com.medicine.Query.MedicineQuery;
 import com.medicine.Util.JDBCHelper;
 
 import java.util.List;
@@ -62,11 +64,12 @@ public class medicineMapperImp implements medicineMapper {
     }
 
     @Override
-    public List<Medicine> selectByMedicineNO(Medicine m) {
-        String sql = "SELECT * FROM medicine where medicineNo=?";
-        String[] values = new String[]{m.getMedicineNo()};
+    public List<Medicine> selectByMedicineName(Medicine m) {
+        String sql = "SELECT * FROM medicine where medicineName=?";
+        String[] values = new String[]{m.getName()};
         return jdbc.select(sql, values, Medicine.class);
     }
+
     @Override
     public List<Medicine> selectAll() {
         String sql = "SELECT * FROM medicine";
@@ -89,5 +92,26 @@ public class medicineMapperImp implements medicineMapper {
                 "OR categoryId LIKE %"+key+"% " +
                 "OR deleted LIKE %"+key+"% " ;
         return jdbc.select(sql,null, Medicine.class);
+    }
+
+    @Override
+    public List<Medicine> selectByMedicinePrice(MedicineQuery m) {
+        String sql = "select * from medicine where price bewteen ? and ?";
+        String[] values = new String[]{m.getMedicineMinPriceStr(),m.getMedicineMaxPriceStr()};
+        return jdbc.select(sql,values,Medicine.class);
+    }
+
+    @Override
+    public List<Medicine> selectByMedicinetype(MedicineQuery m) {
+        String sql = "select * from category,medicine where id = ? and category.id=medicine.categoryId";
+        String[] values = new String[]{m.getCategoryId()};
+        return jdbc.select(sql,values,Medicine.class);
+    }
+
+    @Override
+    public List<Medicine> selectByMedicineDate(MedicineQuery m) {
+        String sql ="select * from medicine where expire=?";
+        String[] values = new String[]{m.getDatePickStr()};
+        return jdbc.select(sql,values,Medicine.class);
     }
 }
