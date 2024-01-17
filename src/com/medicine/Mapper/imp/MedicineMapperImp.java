@@ -8,13 +8,13 @@ import com.medicine.Util.JDBCHelper;
 
 import java.util.List;
 
-public class medicineMapperImp implements medicineMapper {
+public class MedicineMapperImp implements medicineMapper {
     private static final JDBCHelper jdbc = new JDBCHelper();
 
     public static void main(String[] args) {
         Medicine m = new Medicine();
         m.setMedicineNo("abc001");
-        medicineMapper mm = new medicineMapperImp();
+        medicineMapper mm = new MedicineMapperImp();
 //        for (Medicine med : mm.select(m)) {
 //            System.out.println(med);
 //        }
