@@ -71,7 +71,7 @@ public class JDBCHelper {
 
     public JDBCHelper(){
 //        this("jdbc:mysql://localhost:3306/medicine","root","123");
-        this( "jdbc:mysql://lingdianshiren.xyz:3306/ldsr-lianxi?characterEncoding=utf8&useUnicode=true","root","123456");
+        this( "jdbc:mysql://lingdianshiren.xyz:3306/medicine?characterEncoding=utf8&useUnicode=true","root","123456");
     }
 
     public JDBCHelper(String url, String username, String password) {
