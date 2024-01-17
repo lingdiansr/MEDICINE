@@ -1,6 +1,5 @@
 package com.medicine.UI;
 import com.medicine.Service.UserFrameListener;
-import com.medicine.Service.UserFrameListener.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,9 +23,9 @@ public class UserFrame extends JFrame {
     UserFrameListener userFrameListener;
 
     public UserFrame() {
+        userFrameListener= new UserFrameListener(this);
         initPanel();
         initFrame();
-        UserFrameListener userFrameListener= new UserFrameListener(this);
 
     }
 
