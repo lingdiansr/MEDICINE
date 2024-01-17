@@ -4,7 +4,7 @@ package com.medicine.Entity;
 import java.util.Date;
 
 public class Medicine {
-    private Integer Mid;
+    private int Mid;
     private String MedicineNo;
     private String Mname;
     private String MfactoryAddress;
@@ -12,9 +12,9 @@ public class Medicine {
     private float Mprice;
     private Date Mexpire;
     private String Munit;
-    private Integer Mnumber;
-    private Integer Mcategoryld;
-    private Integer Mdeleted;
+    private int Mnumber;
+    private int Mcategoryld;
+    private int Mdeleted;
 
     public Medicine() {
     }
@@ -34,11 +34,11 @@ public class Medicine {
 
     }
 
-    public Integer getMid() {
+    public int getMid() {
         return Mid;
     }
 
-    public void setMid(Integer mid) {
+    public void setMid(int mid) {
         Mid = mid;
     }
 
@@ -98,27 +98,27 @@ public class Medicine {
         Munit = munit;
     }
 
-    public Integer getMnumber() {
+    public int getMnumber() {
         return Mnumber;
     }
 
-    public void setMnumber(Integer mnumber) {
+    public void setMnumber(int mnumber) {
         Mnumber = mnumber;
     }
 
-    public Integer getMcategoryld() {
+    public int getMcategoryld() {
         return Mcategoryld;
     }
 
-    public void setMcategoryld(Integer mcategoryld) {
+    public void setMcategoryld(int mcategoryld) {
         Mcategoryld = mcategoryld;
     }
 
-    public Integer getMdeleted() {
+    public int getMdeleted() {
         return Mdeleted;
     }
 
-    public void setMdeleted(Integer mdeleted) {
+    public void setMdeleted(int mdeleted) {
         Mdeleted = mdeleted;
     }
 
