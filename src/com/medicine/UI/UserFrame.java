@@ -1,38 +1,35 @@
 package com.medicine.UI;
+import com.medicine.Service.UserFrameListener;
+import com.medicine.Service.UserFrameListener.*;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class UserFrame extends JFrame {
-    JPanel panel;
+    public JPanel panel;
 
-    private JLabel titleLabel;
+    public JLabel titleLabel;
 
-    private JLabel usernameLabel;
 
-    private JLabel passwordLabel;
+    public JLabel usernameLabel;
 
-    private JTextField username;
+    public JLabel passwordLabel;
 
-    private JPasswordField password;
+    public JTextField username;
 
-    private JButton loginButton;
-    private JButton registerButton;
+    public JPasswordField password;
+
+    public JButton loginButton;
+    public JButton registerButton;
+    UserFrameListener userFrameListener;
 
     public UserFrame() {
         initPanel();
         initFrame();
-        loginButtonListener();
-        registerButtonListener();
-    }
-
-    private void registerButtonListener() {
+        UserFrameListener userFrameListener= new UserFrameListener(this);
 
     }
 
-    private void loginButtonListener() {
-
-    }
 
     private void initPanel() {
         panel = new JPanel();
@@ -40,12 +37,14 @@ public class UserFrame extends JFrame {
         this.setLayout(null);
         // 1. 标题标签
         titleLabel = new JLabel("医药管理系统",SwingConstants.CENTER);
+
         titleLabel.setForeground(Color.BLUE);
         titleLabel.setFont(new Font("宋体",Font.PLAIN,50));
         titleLabel.setSize(800,100);
 
         // 2.用户名标签
         usernameLabel = new JLabel("用户名:");
+
         usernameLabel.setForeground(new Color(0xFF0000));
         usernameLabel.setFont(new Font("宋体", Font.PLAIN, 30));
         usernameLabel.setBounds(200, 100, 200, 100);
@@ -79,6 +78,7 @@ public class UserFrame extends JFrame {
         loginButton.setFont(new Font("宋体", Font.PLAIN, 20));
         loginButton.setBorderPainted(false);
         loginButton.setBounds(270, 300, 100, 50);
+        loginButton.addActionListener(userFrameListener);
         //注册
         registerButton = new JButton("注册");
         registerButton.setForeground(Color.BLUE);
@@ -86,6 +86,7 @@ public class UserFrame extends JFrame {
         registerButton.setFont(new Font("宋体", Font.PLAIN, 20));
         registerButton.setBorderPainted(false);
         registerButton.setBounds(450, 300, 100, 50);
+        registerButton.addActionListener(userFrameListener);
         panel.add(loginButton);
         panel.add(registerButton);
     }
