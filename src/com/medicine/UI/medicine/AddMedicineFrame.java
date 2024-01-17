@@ -165,4 +165,5 @@ public class AddMedicineFrame extends JDialog {
         // 药品类别
 
     }
+
 }

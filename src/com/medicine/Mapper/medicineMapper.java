@@ -7,7 +7,10 @@ public interface medicineMapper {
     boolean insert(Medicine m);
     boolean delete(Medicine m);
     boolean update(Medicine m);
-    List<Medicine> select(Medicine m);
+//    List<Medicine> select(Medicine m);
+
+    List<Medicine> selectByMedicineNO(Medicine m);
+
     List<Medicine> selectAll();
     List<Medicine> fuzzySelect(String key);
 }

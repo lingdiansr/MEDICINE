@@ -19,7 +19,7 @@ public class UIConstants {
     /**
      * {@link UIConverter#getMedicineData(List, List) 药品数据表格 , 所在的16进制列 -> 药品主键Id  }
      */
-    public static final int MEDICINE_ID = 0X000A;
+    public static final int MEDICINE_ID = 0X0000;
 
 
 }

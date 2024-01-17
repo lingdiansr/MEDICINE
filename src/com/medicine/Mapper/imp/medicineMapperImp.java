@@ -13,9 +13,9 @@ public class medicineMapperImp implements medicineMapper {
         Medicine m = new Medicine();
         m.setMedicineNo("abc001");
         medicineMapper mm = new medicineMapperImp();
-        for (Medicine med : mm.select(m)) {
-            System.out.println(med);
-        }
+//        for (Medicine med : mm.select(m)) {
+//            System.out.println(med);
+//        }
     }
 
     @Override
@@ -62,7 +62,7 @@ public class medicineMapperImp implements medicineMapper {
     }
 
     @Override
-    public List<Medicine> select(Medicine m) {
+    public List<Medicine> selectByMedicineNO(Medicine m) {
         String sql = "SELECT * FROM medicine where medicineNo=?";
         String[] values = new String[]{m.getMedicineNo()};
         return jdbc.select(sql, values, Medicine.class);
@@ -88,8 +88,6 @@ public class medicineMapperImp implements medicineMapper {
                 "OR number LIKE %"+key+"% " +
                 "OR categoryId LIKE %"+key+"% " +
                 "OR deleted LIKE %"+key+"% " ;
-
-
         return jdbc.select(sql,null, Medicine.class);
     }
 }

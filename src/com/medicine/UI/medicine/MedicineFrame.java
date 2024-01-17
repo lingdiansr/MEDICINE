@@ -270,5 +270,7 @@ public class MedicineFrame extends JFrame {
         // todo 清除查询条件
     }
 
-
+    public static void main(String[] args) {
+        new MedicineFrame();
+    }
 }
