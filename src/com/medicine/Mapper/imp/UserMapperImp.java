@@ -31,7 +31,7 @@ public class UserMapperImp implements userMapper {
     }
 
     @Override
-    public List<User> select(User u) {
+    public List<User> selectByUserName(User u) {
         String sql = "SELECT * FROM user where username=?";
 //        String sql = "SELECT * FROM user ";
         String[] values = new String[]{
