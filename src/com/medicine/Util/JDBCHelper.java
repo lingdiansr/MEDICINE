@@ -1,4 +1,4 @@
-package Util;
+package com.medicine.Util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -354,4 +354,9 @@ public class JDBCHelper {
             field.set(result, rs.getDouble(fieldName));
         }
     }
+
+//    public static void main(String[] args) {
+//        JDBCHelper j = new JDBCHelper();
+//        System.out.println(j.getConnection());
+//    }
 }

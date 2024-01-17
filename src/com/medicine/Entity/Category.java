@@ -1,9 +1,9 @@
 package com.medicine.Entity;
 
 public class Category {
-    private int id;
-    private String name;
-    private String description;
+        private int id;
+        private String name;
+        private String description;
 
     public int getId() {
         return id;
@@ -11,6 +11,15 @@ public class Category {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 
     public String getName() {

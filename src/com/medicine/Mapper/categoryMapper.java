@@ -2,9 +2,11 @@ package com.medicine.Mapper;
 
 import com.medicine.Entity.Category;
 
+import java.util.List;
+
 public interface categoryMapper {
-    boolean insert(Category m);
-    boolean delete(Category m);
-    boolean update(Category m);
-    Category[] select(String key);
+    boolean insert(Category c);
+    boolean delete(Category c);
+    boolean update(Category c);
+   List<Category> select(Category c);
 }

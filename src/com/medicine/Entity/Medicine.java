@@ -1,127 +1,139 @@
-
 package com.medicine.Entity;
 
 import java.util.Date;
 
 public class Medicine {
-    private int Mid;
-    private String MedicineNo;
-    private String Mname;
-    private String MfactoryAddress;
-    private String Mdescription;
-    private float Mprice;
-    private Date Mexpire;
-    private String Munit;
-    private int Mnumber;
-    private int Mcategoryld;
-    private int Mdeleted;
+    private int id;
+    private String medicineNo;
+    private String name;
+    private String factoryAddress;
+    private String description;
+    private float price;
+    private Date expire;
+    private String unit;
+    private int number;
+    private int categoryId;
+    private int deleted;
 
     public Medicine() {
     }
-    public Medicine(int mid, String medicineNo, String mname, String mfactoryAddress, String mdescription, float mprice, Date mexpire, String munit, int mnumber, int mcategoryld, int mdeleted) {
 
-        Mdeleted = mdeleted;
-        Mcategoryld = mcategoryld;
-        Mnumber = mnumber;
-        Munit = munit;
-        Mexpire = mexpire;
-        Mprice = mprice;
-        Mdescription = mdescription;
-        MfactoryAddress = mfactoryAddress;
-        Mname = mname;
-        MedicineNo = medicineNo;
-        Mid = mid;
-
+    public Medicine(int id, String medicineNo, String name, String factoryAddress, String description, float price, Date expire, String unit, int number, int categoryId, int deleted) {
+        this.id = id;
+        this.medicineNo = medicineNo;
+        this.name = name;
+        this.factoryAddress = factoryAddress;
+        this.description = description;
+        this.price = price;
+        this.expire = expire;
+        this.unit = unit;
+        this.number = number;
+        this.categoryId = categoryId;
+        this.deleted = deleted;
     }
 
-    public int getMid() {
-        return Mid;
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "id=" + id +
+                ", medicineNo='" + medicineNo + '\'' +
+                ", name='" + name + '\'' +
+                ", factoryAddress='" + factoryAddress + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", expire=" + expire +
+                ", unit='" + unit + '\'' +
+                ", number=" + number +
+                ", categoryId=" + categoryId +
+                ", deleted=" + deleted +
+                '}';
     }
 
-    public void setMid(int mid) {
-        Mid = mid;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMedicineNo() {
-        return MedicineNo;
+        return medicineNo;
     }
 
     public void setMedicineNo(String medicineNo) {
-        MedicineNo = medicineNo;
+        this.medicineNo = medicineNo;
     }
 
-    public String getMname() {
-        return Mname;
+    public String getName() {
+        return name;
     }
 
-    public void setMname(String mname) {
-        Mname = mname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getMfactoryAddress() {
-        return MfactoryAddress;
+    public String getFactoryAddress() {
+        return factoryAddress;
     }
 
-    public void setMfactoryAddress(String mfactoryAddress) {
-        MfactoryAddress = mfactoryAddress;
+    public void setFactoryAddress(String factoryAddress) {
+        this.factoryAddress = factoryAddress;
     }
 
-    public String getMdescription() {
-        return Mdescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMdescription(String mdescription) {
-        Mdescription = mdescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public float getMprice() {
-        return Mprice;
+    public float getPrice() {
+        return price;
     }
 
-    public void setMprice(float mprice) {
-        Mprice = mprice;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
-    public Date getMexpire() {
-        return Mexpire;
+    public Date getExpire() {
+        return expire;
     }
 
-    public void setMexpire(Date mexpire) {
-        Mexpire = mexpire;
+    public void setExpire(Date expire) {
+        this.expire = expire;
     }
 
-    public String getMunit() {
-        return Munit;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setMunit(String munit) {
-        Munit = munit;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
-    public int getMnumber() {
-        return Mnumber;
+    public int getNumber() {
+        return number;
     }
 
-    public void setMnumber(int mnumber) {
-        Mnumber = mnumber;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public int getMcategoryld() {
-        return Mcategoryld;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setMcategoryld(int mcategoryld) {
-        Mcategoryld = mcategoryld;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public int getMdeleted() {
-        return Mdeleted;
+    public int getDeleted() {
+        return deleted;
     }
 
-    public void setMdeleted(int mdeleted) {
-        Mdeleted = mdeleted;
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
-
-
-
 }
