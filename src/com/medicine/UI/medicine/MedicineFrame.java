@@ -3,6 +3,10 @@ package com.medicine.UI.medicine;
 import com.eltima.components.ui.DatePicker;
 import com.medicine.Entity.Category;
 import com.medicine.Entity.Medicine;
+import com.medicine.Mapper.CategoryMapper;
+import com.medicine.Mapper.MedicineMapper;
+import com.medicine.Mapper.imp.CategoryMapperImp;
+import com.medicine.Mapper.imp.MedicineMapperImp;
 import com.medicine.UI.base.UIConstants;
 import com.medicine.UI.base.UIConverter;
 import com.medicine.Query.MedicineQuery;
@@ -12,7 +16,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -158,6 +161,10 @@ public class MedicineFrame extends JFrame {
         JComboBox<Category> target = new JComboBox<>();
         target.setFont(new Font(UIConstants.FONT_NAME_SONG, Font.PLAIN, 12));
         // todo 对类别进行赋值
+        CategoryMapper mp = new CategoryMapperImp();
+        for (Category c:mp.selectAll()) {
+            target.addItem(c);
+        }
         return target;
     }
 
@@ -254,11 +261,12 @@ public class MedicineFrame extends JFrame {
         }
         // todo 查询药品列表
         MedicineQuery medicineQuery = getMedicineQuery();
-        Medicine[] medicines = medicineQuery.executeQuety();
-        // todo 查询分类列表
-
+        MedicineMapper medicineMapper = new MedicineMapperImp();
+        CategoryMapper categoryMapper = new CategoryMapperImp();
+        List<Medicine> medicines= medicineMapper.search(medicineQuery);
+        List<Category> categories= categoryMapper.selectAll();
         // 赋值给tablemodel
-//        tableModel = UIConverter.getMedicineData(medicines, categories);
+        tableModel = UIConverter.getMedicineData(medicines, categories);
     }
 
     private MedicineQuery getMedicineQuery() {
@@ -266,7 +274,7 @@ public class MedicineFrame extends JFrame {
         String medicineNameStr = this.medicineName.getText();
         String medicineMinPriceStr= this.medicineMinPrice.getText();
         String medicineMaxPriceStr=this.medicineMaxPrice.getText();
-        String categoryId= (String) this.medicineCategory.getSelectedItem();
+        String categoryId= String.valueOf(((Category)this.medicineCategory.getSelectedItem()).getId());
         String datePickStr = this.datePick.getText();
 
 

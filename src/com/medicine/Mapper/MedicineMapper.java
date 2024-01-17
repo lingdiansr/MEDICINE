@@ -5,7 +5,7 @@ import com.medicine.Query.MedicineQuery;
 
 import java.util.List;
 
-public interface medicineMapper {
+public interface MedicineMapper {
     boolean insert(Medicine m);
     boolean delete(Medicine m);
     boolean update(Medicine m);
@@ -22,4 +22,5 @@ public interface medicineMapper {
 
     List<Medicine> selectByMedicineDate(MedicineQuery m);
 
+    List<Medicine> search(MedicineQuery medicineQuery);
 }

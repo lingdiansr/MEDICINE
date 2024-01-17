@@ -2,19 +2,19 @@ package com.medicine.Mapper.imp;
 
 import com.medicine.Entity.Category;
 import com.medicine.Entity.Medicine;
-import com.medicine.Mapper.medicineMapper;
+import com.medicine.Mapper.MedicineMapper;
 import com.medicine.Query.MedicineQuery;
 import com.medicine.Util.JDBCHelper;
 
 import java.util.List;
 
-public class MedicineMapperImp implements medicineMapper {
+public class MedicineMapperImp implements MedicineMapper {
     private static final JDBCHelper jdbc = new JDBCHelper();
 
     public static void main(String[] args) {
         Medicine m = new Medicine();
         m.setMedicineNo("abc001");
-        medicineMapper mm = new MedicineMapperImp();
+        MedicineMapper mm = new MedicineMapperImp();
 //        for (Medicine med : mm.select(m)) {
 //            System.out.println(med);
 //        }
@@ -113,5 +113,15 @@ public class MedicineMapperImp implements medicineMapper {
         String sql ="select * from medicine where expire=?";
         String[] values = new String[]{m.getDatePickStr()};
         return jdbc.select(sql,values,Medicine.class);
+    }
+
+//    getSqlMedicineQuery(MedicineQuery medicineQuery)
+
+    @Override
+    public List<Medicine> search(MedicineQuery medicineQuery) {
+
+
+
+        return null;
     }
 }

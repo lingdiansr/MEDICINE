@@ -1,12 +1,12 @@
 package com.medicine.Mapper.imp;
 
 import com.medicine.Entity.Category;
-import com.medicine.Mapper.categoryMapper;
+import com.medicine.Mapper.CategoryMapper;
 import com.medicine.Util.JDBCHelper;
 
 import java.util.List;
 
-public class CategoryMapperImp implements categoryMapper {
+public class CategoryMapperImp implements CategoryMapper {
     private static final JDBCHelper jdbc = new JDBCHelper();
 
     @Override
@@ -36,4 +36,11 @@ public class CategoryMapperImp implements categoryMapper {
         String[] values = new String[]{String.valueOf(c.getId())};
         return jdbc.select(sql, values, Category.class);
     }
+    @Override
+    public List<Category> selectAll() {
+        String sql = "SELECT * FROM category";
+//        String[] values = new String[]{String.valueOf(c.getId())};
+        return jdbc.select(sql, null, Category.class);
+    }
+
 }
