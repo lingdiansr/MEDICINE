@@ -1,6 +1,5 @@
 package com.medicine.Mapper.imp;
 
-import com.medicine.Entity.Category;
 import com.medicine.Entity.Medicine;
 import com.medicine.Mapper.MedicineMapper;
 import com.medicine.Query.MedicineQuery;
@@ -80,48 +79,73 @@ public class MedicineMapperImp implements MedicineMapper {
     @Override
     public List<Medicine> fuzzySelect(String key) {
         String sql = "SELECT * FROM medicine " +
-                "WHERE id LIKE %"+key+"% " +
-                "OR medicineNO LIKE %"+key+"% " +
-                "OR name LIKE %"+key+"% " +
-                "OR factoryAddress LIKE %"+key+"% " +
-                "OR description LIKE %"+key+"% " +
-                "OR price LIKE %"+key+"% " +
-                "OR expire LIKE %"+key+"% " +
-                "OR unit LIKE %"+key+"% " +
-                "OR number LIKE %"+key+"% " +
-                "OR categoryId LIKE %"+key+"% " +
-                "OR deleted LIKE %"+key+"% " ;
-        return jdbc.select(sql,null, Medicine.class);
+                "WHERE id LIKE %" + key + "% " +
+                "OR medicineNO LIKE %" + key + "% " +
+                "OR name LIKE %" + key + "% " +
+                "OR factoryAddress LIKE %" + key + "% " +
+                "OR description LIKE %" + key + "% " +
+                "OR price LIKE %" + key + "% " +
+                "OR expire LIKE %" + key + "% " +
+                "OR unit LIKE %" + key + "% " +
+                "OR number LIKE %" + key + "% " +
+                "OR categoryId LIKE %" + key + "% " +
+                "OR deleted LIKE %" + key + "% ";
+        return jdbc.select(sql, null, Medicine.class);
     }
 
     @Override
     public List<Medicine> selectByMedicinePrice(MedicineQuery m) {
         String sql = "select * from medicine where price bewteen ? and ?";
-        String[] values = new String[]{m.getMedicineMinPriceStr(),m.getMedicineMaxPriceStr()};
-        return jdbc.select(sql,values,Medicine.class);
+        String[] values = new String[]{m.getMedicineMinPrice(), m.getMedicineMaxPrice()};
+        return jdbc.select(sql, values, Medicine.class);
     }
 
     @Override
     public List<Medicine> selectByMedicinetype(MedicineQuery m) {
         String sql = "select * from category,medicine where id = ? and category.id=medicine.categoryId";
         String[] values = new String[]{m.getCategoryId()};
-        return jdbc.select(sql,values,Medicine.class);
+        return jdbc.select(sql, values, Medicine.class);
     }
 
     @Override
     public List<Medicine> selectByMedicineDate(MedicineQuery m) {
-        String sql ="select * from medicine where expire=?";
-        String[] values = new String[]{m.getDatePickStr()};
-        return jdbc.select(sql,values,Medicine.class);
+        String sql = "select * from medicine where expire=?";
+        String[] values = new String[]{m.getDatePick()};
+        return jdbc.select(sql, values, Medicine.class);
     }
 
-//    getSqlMedicineQuery(MedicineQuery medicineQuery)
+    @Override
+    public String getSqlMedicineQuery(MedicineQuery query) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM medicine WHERE deleted = 0");
+        if (query == null) return sql.toString();
+
+        if (query.getMedicineName() != null) {
+            sql.append(" AND `name` LIKE \"%" + query.getMedicineName() + "%\"");
+        }
+
+        if (query.getMedicineMinPrice() != null){
+            sql.append(" AND price >= " + query.getMedicineMinPrice());
+        }
+
+        if (query.getMedicineMaxPrice() != null){
+            sql.append(" AND price <= " + query.getMedicineMaxPrice());
+        }
+
+        if (query.getDatePick() != null){
+            sql.append(" AND expire <= \"" + query.getDatePick() + "\"");
+        }
+
+        if (query.getCategoryId() != null){
+            sql.append(" AND categoryId = " + query.getCategoryId());
+        }
+
+        return sql.toString();
+    }
 
     @Override
     public List<Medicine> search(MedicineQuery medicineQuery) {
-
-
-
-        return null;
+        MedicineMapper mm = new MedicineMapperImp();
+        String sql = mm.getSqlMedicineQuery(medicineQuery);
+        return jdbc.select(sql,null,Medicine.class);
     }
 }

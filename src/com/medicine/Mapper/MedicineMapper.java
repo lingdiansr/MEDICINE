@@ -22,5 +22,7 @@ public interface MedicineMapper {
 
     List<Medicine> selectByMedicineDate(MedicineQuery m);
 
+    String getSqlMedicineQuery(MedicineQuery medicineQuery);
+
     List<Medicine> search(MedicineQuery medicineQuery);
 }

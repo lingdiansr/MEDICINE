@@ -8,7 +8,7 @@ public class Medicine {
     private String name;
     private String factoryAddress;
     private String description;
-    private float price;
+    private double price;
     private Date expire;
     private String unit;
     private int number;
@@ -89,7 +89,7 @@ public class Medicine {
         this.description = description;
     }
 
-    public float getPrice() {
+    public Double getPrice() {
         return price;
     }
 

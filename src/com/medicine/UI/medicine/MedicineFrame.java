@@ -161,6 +161,7 @@ public class MedicineFrame extends JFrame {
         JComboBox<Category> target = new JComboBox<>();
         target.setFont(new Font(UIConstants.FONT_NAME_SONG, Font.PLAIN, 12));
         // todo 对类别进行赋值
+        target.addItem(new Category(-1,"所有类别",""));
         CategoryMapper mp = new CategoryMapperImp();
         for (Category c:mp.selectAll()) {
             target.addItem(c);
@@ -263,6 +264,7 @@ public class MedicineFrame extends JFrame {
         MedicineQuery medicineQuery = getMedicineQuery();
         MedicineMapper medicineMapper = new MedicineMapperImp();
         CategoryMapper categoryMapper = new CategoryMapperImp();
+
         List<Medicine> medicines= medicineMapper.search(medicineQuery);
         List<Category> categories= categoryMapper.selectAll();
         // 赋值给tablemodel
@@ -276,8 +278,6 @@ public class MedicineFrame extends JFrame {
         String medicineMaxPriceStr=this.medicineMaxPrice.getText();
         String categoryId= String.valueOf(((Category)this.medicineCategory.getSelectedItem()).getId());
         String datePickStr = this.datePick.getText();
-
-
         return MedicineQuery.from(medicineNameStr, medicineMinPriceStr, medicineMaxPriceStr,categoryId, datePickStr);
 //        return null;
     }
