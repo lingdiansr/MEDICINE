@@ -1,9 +1,9 @@
 package com.medicine.Entity;
 
 public class Category {
-    private int id;
-    private String name;
-    private String description;
+        private int id;
+        private String name;
+        private String description;
 
     public int getId() {
         return id;

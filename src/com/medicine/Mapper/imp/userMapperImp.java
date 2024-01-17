@@ -33,7 +33,6 @@ public class userMapperImp implements userMapper {
     @Override
     public List<User> select(User u) {
         String sql = "SELECT * FROM user where username=?";
-//        jdbc.select()
         String[] values = new String[]{
                 u.getUsername()
         };
