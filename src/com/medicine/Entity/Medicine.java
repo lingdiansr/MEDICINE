@@ -18,7 +18,7 @@ public class Medicine {
     public Medicine() {
     }
 
-    public Medicine(int id, String medicineNo, String name, String factoryAddress, String description, float price, Date expire, String unit, int number, int categoryId, int deleted) {
+    public Medicine(int id, String medicineNo, String name, String factoryAddress, String description, double price, Date expire, String unit, int number, int categoryId, int deleted) {
         this.id = id;
         this.medicineNo = medicineNo;
         this.name = name;

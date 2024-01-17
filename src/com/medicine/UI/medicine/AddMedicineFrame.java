@@ -93,6 +93,7 @@ public class AddMedicineFrame extends JDialog {
 
     private void midPane() {
         midPane = new JPanel();
+
         LayoutManager layout = new BoxLayout(midPane, BoxLayout.PAGE_AXIS);
         midPane.setLayout(layout);
 
