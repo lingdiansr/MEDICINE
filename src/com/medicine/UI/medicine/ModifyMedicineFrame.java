@@ -1,10 +1,11 @@
-package com.openvalley.ui.medicine;
+package com.medicine.UI.medicine;
 
 import com.eltima.components.ui.DatePicker;
-import com.openvalley.server.entity.Category;
-import com.openvalley.server.entity.Medicine;
-import com.openvalley.ui.base.UIConstants;
-import com.openvalley.ui.base.UIConverter;
+import com.medicine.Entity.Category;
+import com.medicine.Entity.Medicine;
+import com.medicine.UI.base.UIConstants;
+import com.medicine.UI.base.UIConverter;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -125,7 +126,7 @@ public class ModifyMedicineFrame extends JDialog {
         datePick = UIConverter.getDatePicker(medicineFrame.dealDate(true));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            datePick = UIConverter.getDatePicker(dateFormat.parse(medicine.getExpire()));
+            datePick = UIConverter.getDatePicker(dateFormat.parse(String.valueOf(medicine.getExpire())));
         } catch (ParseException e) {
             System.out.println("有效期获取失败!");
             e.printStackTrace();

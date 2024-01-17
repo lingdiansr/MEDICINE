@@ -1,10 +1,9 @@
-package com.openvalley.ui.medicine;
+package com.medicine.UI.medicine;
 
 import com.eltima.components.ui.DatePicker;
-import com.openvalley.server.entity.Category;
-import com.openvalley.server.query.MedicineQuery;
-import com.openvalley.ui.base.UIConstants;
-import com.openvalley.ui.base.UIConverter;
+import com.medicine.Entity.Category;
+import com.medicine.UI.base.UIConstants;
+import com.medicine.UI.base.UIConverter;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -252,7 +251,7 @@ public class MedicineFrame extends JFrame {
             tableModel = null;
         }
         // todo 查询药品列表
-        MedicineQuery medicineQuery = getMedicineQuery();
+//        MedicineQuery medicineQuery = getMedicineQuery();
 
         // todo 查询分类列表
 
@@ -260,12 +259,12 @@ public class MedicineFrame extends JFrame {
 //        tableModel = UIConverter.getMedicineData(medicines, categories);
     }
 
-    private MedicineQuery getMedicineQuery() {
-        // TODO 一些过滤条件 , 价格的简单判断
-
-//        return MedicineQuery.from(medicineNameStr, medicineMinPriceStr, medicineMaxPriceStr, categoryId, datePickStr);
-        return null;
-    }
+//    private MedicineQuery getMedicineQuery() {
+//        // TODO 一些过滤条件 , 价格的简单判断
+//
+////        return MedicineQuery.from(medicineNameStr, medicineMinPriceStr, medicineMaxPriceStr, categoryId, datePickStr);
+//        return null;
+//    }
 
     private void clearMedicineQuery() {
         // todo 清除查询条件

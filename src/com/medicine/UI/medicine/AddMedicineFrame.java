@@ -1,12 +1,10 @@
-package com.openvalley.ui.medicine;
+package com.medicine.UI.medicine;
 
 import com.eltima.components.ui.DatePicker;
-import com.openvalley.server.entity.Category;
-import com.openvalley.server.entity.Medicine;
-import com.openvalley.server.mapper.MedicineMapper;
-import com.openvalley.server.mapper.impl.MedicineMapperImpl;
-import com.openvalley.ui.base.UIConstants;
-import com.openvalley.ui.base.UIConverter;
+import com.medicine.Entity.Category;
+import com.medicine.UI.base.UIConstants;
+import com.medicine.UI.base.UIConverter;
+
 
 import javax.swing.*;
 import java.awt.*;
