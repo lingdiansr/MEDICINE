@@ -14,18 +14,19 @@ public class medicineMapperImp implements medicineMapper {
         String sql = "INSERT INTO medicine(medicineNo,name,factoryAddress,description,price,expire,unit,number,categoryId,deleted) VALUES(?,?,?,?,?,?,?,?,?,?)";
         String[] values = new String[]{
                 m.getMedicineNo(),
-                m.getMname(),
-                m.getMfactoryAddress(),
-                m.getMdescription(),
-                String.valueOf(m.getMprice()),
-                String.valueOf(m.getMexpire()),
-                m.getMunit(),
-                String.valueOf(m.getMnumber()),
-                String.valueOf(m.getMcategoryld()),
-                String.valueOf(m.getMdeleted())
+                m.getName(),
+                m.getFactoryAddress(),
+                m.getDescription(),
+                String.valueOf(m.getPrice()),
+                String.valueOf(m.getExpire()),
+                m.getUnit(),
+                String.valueOf(m.getNumber()),
+                String.valueOf(m.getCategoryId()),
+                String.valueOf(m.getDeleted())
         };
         return jdbc.insert(sql, values) > 0;
     }
+
     @Override
     public boolean delete(Medicine m) {
         String sql = "DELETE FROM medicine WHERE medicineNo=?";
@@ -37,15 +38,15 @@ public class medicineMapperImp implements medicineMapper {
     public boolean update(Medicine m) {
         String sql = "UPDATE medicine SET name=?, factoryAddress=?, description=?, price=?, expire=?, unit=?, number=?, categoryId=?, deleted=? WHERE medicineNo=?";
         String[] values = new String[]{
-                m.getMname(),
-                m.getMfactoryAddress(),
-                m.getMdescription(),
-                String.valueOf(m.getMprice()),
-                String.valueOf(m.getMexpire()),
-                m.getMunit(),
-                String.valueOf(m.getMnumber()),
-                String.valueOf(m.getMcategoryld()),
-                String.valueOf(m.getMdeleted()),
+                m.getName(),
+                m.getFactoryAddress(),
+                m.getDescription(),
+                String.valueOf(m.getPrice()),
+                String.valueOf(m.getExpire()),
+                m.getUnit(),
+                String.valueOf(m.getNumber()),
+                String.valueOf(m.getCategoryId()),
+                String.valueOf(m.getDeleted()),
                 m.getMedicineNo()
         };
         return jdbc.update(sql, values) > 0;
