@@ -237,12 +237,12 @@ public class MedicineFrame extends JFrame {
     }
 
     private void hideMedicineId() {
-        if (table != null) {
-            // 隐藏 药品主键Id
-            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setMinWidth(0);
-            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setMaxWidth(0);
-            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setPreferredWidth(0);
-        }
+//        if (table != null) {
+//            // 隐藏 药品主键Id
+//            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setMinWidth(0);
+//            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setMaxWidth(0);
+//            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setPreferredWidth(0);
+//        }
     }
 
 
