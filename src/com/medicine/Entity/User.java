@@ -16,6 +16,16 @@ public class User {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", type=" + type +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

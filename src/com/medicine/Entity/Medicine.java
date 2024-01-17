@@ -1,4 +1,3 @@
-
 package com.medicine.Entity;
 
 import java.util.Date;
@@ -18,6 +17,7 @@ public class Medicine {
 
     public Medicine() {
     }
+
     public Medicine(int mid, String medicineNo, String mname, String mfactoryAddress, String mdescription, float mprice, Date mexpire, String munit, int mnumber, int mcategoryld, int mdeleted) {
 
         Mdeleted = mdeleted;
@@ -32,6 +32,23 @@ public class Medicine {
         MedicineNo = medicineNo;
         Mid = mid;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "Mid=" + Mid +
+                ", MedicineNo='" + MedicineNo + '\'' +
+                ", Mname='" + Mname + '\'' +
+                ", MfactoryAddress='" + MfactoryAddress + '\'' +
+                ", Mdescription='" + Mdescription + '\'' +
+                ", Mprice=" + Mprice +
+                ", Mexpire=" + Mexpire +
+                ", Munit='" + Munit + '\'' +
+                ", Mnumber=" + Mnumber +
+                ", Mcategoryld=" + Mcategoryld +
+                ", Mdeleted=" + Mdeleted +
+                '}';
     }
 
     public int getMid() {
@@ -121,7 +138,6 @@ public class Medicine {
     public void setMdeleted(int mdeleted) {
         Mdeleted = mdeleted;
     }
-
 
 
 }

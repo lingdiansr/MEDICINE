@@ -27,15 +27,16 @@ public class userMapperImp implements userMapper {
     public boolean update(User u) {
         String sql = "UPDATE user SET password=? and type=? WHERE username= ?";
         String[] values = new String[]{u.getPassword(), String.valueOf(u.isType()), u.getUsername()};
-        return jdbc.update(sql,values)>0;
+        return jdbc.update(sql, values) > 0;
     }
 
     @Override
     public List<User> select(User u) {
         String sql = "SELECT * FROM user where username=?";
+//        String sql = "SELECT * FROM user ";
         String[] values = new String[]{
                 u.getUsername()
         };
-        return jdbc.select(sql,values,User.class);
+        return jdbc.select(sql, values, User.class);
     }
 }
