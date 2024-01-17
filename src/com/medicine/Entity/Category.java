@@ -1,42 +1,43 @@
 package com.medicine.Entity;
 
 public class Category {
-    private int Cid;
-    private String Cname;
-    private String Description;
-    public Category(){}
+    private int id;
+    private String name;
+    private String description;
 
-    public int getCid() {
-        return Cid;
+    public int getId() {
+        return id;
     }
 
-    public String getCname() {
-        return Cname;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setCname(String cname) {
-        Cname = cname;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
-    public void setCid(int cid) {
-        Cid = cid;
-    }
-
-    public Category(int cid, String cname, String description){
-
-        Cid = cid;
-        Cname = cname;
-        Description =description;
+    public Category(){
 
     }
 
+    public Category(int id,String name,String description){
+        this.id=id;
+        this.name=name;
+        this.description=description;
 
+    }
 }
+
