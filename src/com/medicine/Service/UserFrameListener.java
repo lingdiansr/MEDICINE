@@ -8,10 +8,10 @@ import com.medicine.UI.UserFrame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class UserFrameListener implements ActionListener {
     private final transient UserMapper userMapper = new UserMapperImp();
-    User user = new User();
     UserFrame uf;
     public UserFrameListener(UserFrame uf) {
         this.uf = uf;
@@ -19,15 +19,18 @@ public class UserFrameListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String id = uf.username.getText();
+        String username = uf.username.getText();
         String password = new String(uf.password.getPassword());
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
 
         if (e.getSource() == uf.loginButton) {
-            if (id.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(uf, "请正确输入用户名和密码", "错误", JOptionPane.ERROR_MESSAGE);
             } else {
-                userMapper.selectByUserName(user);
-                if (user != null && user.getPassword().equals(password)) {
+                User u = userMapper.selectByUserName(user).get(0);
+                if (Objects.equals(password,u.getPassword())) {
                     JOptionPane.showMessageDialog(uf, "登录成功", "成功", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(uf, "用户名或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
