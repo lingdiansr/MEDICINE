@@ -1,8 +1,8 @@
-package com.medicine.Mapper.imp;
+package com.medicine.Mapper;
 
 import com.medicine.Entity.Category;
 
-public interface categoryImp {
+public interface categoryMapper {
     boolean insert(Category m);
     boolean delete(Category m);
     boolean update(Category m);
