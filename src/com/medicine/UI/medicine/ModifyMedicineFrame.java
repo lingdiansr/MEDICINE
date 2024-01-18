@@ -3,6 +3,8 @@ package com.medicine.UI.medicine;
 import com.eltima.components.ui.DatePicker;
 import com.medicine.Entity.Category;
 import com.medicine.Entity.Medicine;
+import com.medicine.Mapper.MedicineMapper;
+import com.medicine.Mapper.imp.MedicineMapperImp;
 import com.medicine.UI.base.UIConstants;
 import com.medicine.UI.base.UIConverter;
 
@@ -11,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ModifyMedicineFrame extends JDialog {
 
@@ -151,7 +154,8 @@ public class ModifyMedicineFrame extends JDialog {
         // 9.所属类别查询 容器初始化
         medicineCategory = medicineFrame.initCategoryData(true);
         // todo  获取类别列表注入到item中
-        medicineCategory.setSelectedItem(null);
+
+        medicineCategory.setSelectedItem(medicine.getCategoryId());
         midPane.add(createFiledJPanel("所属类别:", medicineCategory));
     }
 
@@ -177,6 +181,22 @@ public class ModifyMedicineFrame extends JDialog {
     }
 
     private void modifyButtonListener() {
-
+        medicine.setMedicineNo(medicineNo.getText());
+        medicine.setDescription(medicineDescription.getText());
+        medicine.setName(medicineName.getText());
+        medicine.setFactoryAddress(medicineFactoryAddress.getText());
+        medicine.setNumber(Integer.parseInt(medicineNumber.getText()));
+        medicine.setPrice(Double.valueOf(medicinePrice.getText()));
+        medicine.setUnit(medicineUnit.getText());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        medicine.setExpire();
+        medicine.setExpire(datePick.getText());
+        medicine.setCategoryId((((Category)medicineCategory.getSelectedItem())).getId());
+        MedicineMapper mm =new MedicineMapperImp();
+        if (mm.update(medicine)){
+            JOptionPane.showMessageDialog(this, "修改成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(this, "修改失败", "错误", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
