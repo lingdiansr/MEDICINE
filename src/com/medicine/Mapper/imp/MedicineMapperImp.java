@@ -63,13 +63,6 @@ public class MedicineMapperImp implements MedicineMapper {
     }
 
     @Override
-    public List<Medicine> selectByMedicineName(Medicine m) {
-        String sql = "SELECT * FROM medicine where medicineName=?";
-        String[] values = new String[]{m.getName()};
-        return jdbc.select(sql, values, Medicine.class);
-    }
-
-    @Override
     public List<Medicine> selectAll() {
         String sql = "SELECT * FROM medicine";
 //        String[] values = new String[]{m.getMedicineNo()};
@@ -93,26 +86,6 @@ public class MedicineMapperImp implements MedicineMapper {
         return jdbc.select(sql, null, Medicine.class);
     }
 
-    @Override
-    public List<Medicine> selectByMedicinePrice(MedicineQuery m) {
-        String sql = "select * from medicine where price bewteen ? and ?";
-        String[] values = new String[]{m.getMedicineMinPrice(), m.getMedicineMaxPrice()};
-        return jdbc.select(sql, values, Medicine.class);
-    }
-
-    @Override
-    public List<Medicine> selectByMedicinetype(MedicineQuery m) {
-        String sql = "select * from category,medicine where id = ? and category.id=medicine.categoryId";
-        String[] values = new String[]{m.getCategoryId()};
-        return jdbc.select(sql, values, Medicine.class);
-    }
-
-    @Override
-    public List<Medicine> selectByMedicineDate(MedicineQuery m) {
-        String sql = "select * from medicine where expire=?";
-        String[] values = new String[]{m.getDatePick()};
-        return jdbc.select(sql, values, Medicine.class);
-    }
 
     @Override
     public String getSqlMedicineQuery(MedicineQuery query) {
