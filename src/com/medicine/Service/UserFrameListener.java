@@ -50,15 +50,6 @@ public class UserFrameListener implements ActionListener {
             if (username.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(uf, "请正确输入用户名和密码", "错误", JOptionPane.ERROR_MESSAGE);
             } else {
-//               // User u = userMapper.selectByUserName(user).get(0);
-//                if (userMapper.selectByUserName(user).get(0)==null) {
-//                    if (userMapper.insert(user)) {
-//                        JOptionPane.showMessageDialog(uf, "注册成功", "错误", JOptionPane.ERROR_MESSAGE);
-//                    }
-//                } else {
-//                    JOptionPane.showMessageDialog(uf, "用户名已存在", "错误", JOptionPane.INFORMATION_MESSAGE);
-//
-//                }
                 User u = userMapper.selectByUserName(username);
 
                 if (u != null) {
@@ -69,14 +60,13 @@ public class UserFrameListener implements ActionListener {
                     entity.setPassword(password);
                     entity.setType("0");
                     if ( userMapper.insert(entity)){
-                        JOptionPane.showMessageDialog(uf, "注册成功", "错误", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(uf, "注册成功", "正确", JOptionPane.INFORMATION_MESSAGE);
 
                     }
 
 
                 }
             }
-           // System.exit(0);
         }
 
     }
