@@ -30,12 +30,18 @@ public class UserFrameListener implements ActionListener {
             if (username.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(uf, "请正确输入用户名和密码", "错误", JOptionPane.ERROR_MESSAGE);
             } else {
-                User u = userMapper.selectByUserName(user).get(0);
-                if (Objects.equals(password,u.getPassword())) {
-                    JOptionPane.showMessageDialog(uf, "登录成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-                    new MedicineFrame();
-                } else {
-                    JOptionPane.showMessageDialog(uf, "用户名或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
+                User user1 = userMapper.selectByUserName(username);
+                if (user1==null){
+                    JOptionPane.showMessageDialog(uf, "不存在该用户请注册", "失败", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else {
+                    User u = userMapper.selectByUserName(user).get(0);
+                    if (Objects.equals(password, u.getPassword())) {
+                        JOptionPane.showMessageDialog(uf, "登录成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                        new MedicineFrame();
+                    } else {
+                        JOptionPane.showMessageDialog(uf, "用户名或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
 
