@@ -212,7 +212,7 @@ public class MedicineFrame extends JFrame {
                 String unit = (String) table.getValueAt(selectedRow, 8);
                 int number = Integer.parseInt((String) table.getValueAt(selectedRow, 6));
                 CategoryMapper cp = new CategoryMapperImp();
-                int categoryId =cp.selectIdByName((String)table.getValueAt(selectedRow,9)).get(0).getId();
+                int categoryId = cp.selectIdByName((String) table.getValueAt(selectedRow, 9)).get(0).getId();
                 int deleted = 0;
 
                 // 封装成Medicine对象
@@ -257,6 +257,16 @@ public class MedicineFrame extends JFrame {
 
             if (choose == JOptionPane.YES_OPTION) {
                 // todo 删除逻辑
+                int selectedRow = table.getSelectedRow();
+                int id = Integer.parseInt((String) table.getValueAt(selectedRow, UIConstants.MEDICINE_ID));
+                MedicineMapper mm = new MedicineMapperImp();
+                Medicine m = new Medicine();
+                m.setId(id);
+                if (mm.delete(m)){
+                    JOptionPane.showMessageDialog(this, "删除成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+                }else {
+                    JOptionPane.showMessageDialog(this, "删除失败", "失败", JOptionPane.ERROR_MESSAGE);
+                }
             }
             searchButtonListener(); // 刷新加载数据
         }

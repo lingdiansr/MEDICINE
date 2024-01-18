@@ -39,11 +39,16 @@ public class MedicineMapperImp implements MedicineMapper {
 
     @Override
     public boolean delete(Medicine m) {
-        String sql = "DELETE FROM medicine WHERE medicineNo=?";
-        String[] values = new String[]{m.getMedicineNo()};
+        String sql = "DELETE FROM medicine WHERE id=?";
+        String[] values = new String[]{String.valueOf(m.getId())};
         return jdbc.delete(sql, values) > 0;
     }
-
+//    @Override
+//    public boolean deleteById(int id){
+//        Medicine m = new Medicine();
+//        m.setId(id);
+//        return delete(m);
+//    }
     @Override
     public boolean update(Medicine m) {
         String sql = "UPDATE medicine SET name=?, factoryAddress=?, description=?, price=?, expire=?, unit=?, number=?, categoryId=?, deleted=? WHERE medicineNo=?";
