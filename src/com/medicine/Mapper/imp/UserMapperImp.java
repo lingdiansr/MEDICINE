@@ -39,4 +39,12 @@ public class UserMapperImp implements UserMapper {
         };
         return jdbc.select(sql, values, User.class);
     }
+
+    @Override
+    public User selectByUserName(String username) {
+        String sql = "SELECT * FROM user WHERE username = ?";
+        String[] selectValues = new String[]{username};
+        List<User> result = jdbc.select(sql, selectValues, User.class);
+        return result.isEmpty() ? null :result.get(0);
+    }
 }

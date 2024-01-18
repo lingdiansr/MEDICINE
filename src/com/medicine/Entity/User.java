@@ -4,12 +4,12 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private boolean type;
+    private String type;
 
     public User() {
     }
 
-    public User(int id, String username, String password, boolean type) {
+    public User(int id, String username, String password, String type) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -50,11 +50,11 @@ public class User {
         this.password = password;
     }
 
-    public boolean isType() {
+    public String isType() {
         return type;
     }
 
-    public void setType(boolean type) {
+    public void setType(String type) {
         this.type = type;
     }
 }

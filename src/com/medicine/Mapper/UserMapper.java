@@ -8,4 +8,5 @@ public interface UserMapper {
     boolean delete(User u);
     boolean update(User u);
     List<User> selectByUserName(User u);
+    User selectByUserName(String username);
 }
