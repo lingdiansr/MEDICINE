@@ -14,4 +14,5 @@ public interface CategoryMapper {
     List<Category> select(Category c);
 
     List<Category> selectAll();
+    List<Category> selectIdByName(String name);
 }

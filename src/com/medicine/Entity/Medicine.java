@@ -9,7 +9,7 @@ public class Medicine {
     private String factoryAddress;
     private String description;
     private double price;
-    private Date expire;
+    private String expire;
     private String unit;
     private int number;
     private int categoryId;
@@ -18,7 +18,7 @@ public class Medicine {
     public Medicine() {
     }
 
-    public Medicine(int id, String medicineNo, String name, String factoryAddress, String description, double price, Date expire, String unit, int number, int categoryId, int deleted) {
+    public Medicine(int id, String medicineNo, String name, String factoryAddress, String description, double price, String expire, String unit, int number, int categoryId, int deleted) {
         this.id = id;
         this.medicineNo = medicineNo;
         this.name = name;
@@ -93,15 +93,15 @@ public class Medicine {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Date getExpire() {
+    public String getExpire() {
         return expire;
     }
 
-    public void setExpire(Date expire) {
+    public void setExpire(String expire) {
         this.expire = expire;
     }
 

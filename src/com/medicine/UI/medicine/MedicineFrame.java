@@ -208,30 +208,18 @@ public class MedicineFrame extends JFrame {
                 String factoryAddress = (String) table.getValueAt(selectedRow, 4);
                 String description = (String) table.getValueAt(selectedRow, 3);
                 double price = Double.parseDouble((String) table.getValueAt(selectedRow, 7));
-                Date expire = null;
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    expire = dateFormat.parse((String) table.getValueAt(selectedRow, 5));
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
-                }
+                String expire = (String) table.getValueAt(selectedRow, 5);
                 String unit = (String) table.getValueAt(selectedRow, 8);
                 int number = Integer.parseInt((String) table.getValueAt(selectedRow, 6));
-                Object value = table.getValueAt(selectedRow, 9);
-                int categoryId;
-
-                if (value instanceof Integer) {
-                    categoryId = (int) value;
-                } else {
-                    // Handle the non-integer value, for example, show an error message or set a default value
-                    categoryId = -1;  // Set a default value or handle the non-integer value based on your application's requirements
-                }
+                CategoryMapper cp = new CategoryMapperImp();
+                int categoryId =cp.selectIdByName((String)table.getValueAt(selectedRow,9)).get(0).getId();
                 int deleted = 0;
 
                 // 封装成Medicine对象
                 Medicine medicine = new Medicine(id, medicineNo, name, factoryAddress, description, price, expire, unit, number, categoryId, deleted);
-//                new ModifyMedicineFrame(MedicineFrame.this, true, medicine);
                 System.out.println(medicine);
+
+                new ModifyMedicineFrame(MedicineFrame.this, true, medicine);
             }
         });
 
@@ -308,17 +296,24 @@ public class MedicineFrame extends JFrame {
         String medicineNameStr = this.medicineName.getText();
         String medicineMinPriceStr = this.medicineMinPrice.getText();
         String medicineMaxPriceStr = this.medicineMaxPrice.getText();
-        String categoryId = String.valueOf(((Category) this.medicineCategory.getSelectedItem()).getId());
+        String categoryId = String.valueOf(((Category) Objects.requireNonNull(this.medicineCategory.getSelectedItem())).getId());
         String datePickStr = this.datePick.getText();
         return MedicineQuery.from(medicineNameStr, medicineMinPriceStr, medicineMaxPriceStr, categoryId, datePickStr);
     }
 
     private void clearMedicineQuery() {
         // todo 清除查询条件
-        medicineName = UIConverter.initTextField();
-        medicineMinPrice = UIConverter.initTextField();
-        medicineMaxPrice = UIConverter.initTextField();
-        medicineCategory = initCategoryData(true);
-        datePick = UIConverter.getDatePicker(dealDate(true));
+//        medicineName = UIConverter.initTextField();
+//        medicineMinPrice = UIConverter.initTextField();
+//        medicineMaxPrice = UIConverter.initTextField();
+//        medicineCategory = initCategoryData(true);
+//        datePick = UIConverter.getDatePicker(dealDate(true));
+        medicineName.setText(null);
+        medicineMinPrice.setText(null);
+        medicineMaxPrice.setText(null);
+        medicineCategory.setSelectedIndex(0);
+//        datePick.setLocale(new Locale(new Date()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datePick.getInnerTextField().setText(dateFormat.format(dealDate(true)));
     }
 }
