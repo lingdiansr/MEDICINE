@@ -1,12 +1,12 @@
 package com.medicine.Mapper.imp;
 
 import com.medicine.Entity.User;
-import com.medicine.Mapper.userMapper;
+import com.medicine.Mapper.UserMapper;
 import com.medicine.Util.JDBCHelper;
 
 import java.util.List;
 
-public class UserMapperImp implements userMapper {
+public class UserMapperImp implements UserMapper {
     private static final JDBCHelper jdbc = new JDBCHelper();
 
     @Override

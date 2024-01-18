@@ -1,19 +1,19 @@
 package com.medicine.Mapper.imp;
 
 import com.medicine.Entity.Medicine;
-import com.medicine.Mapper.medicineMapper;
+import com.medicine.Mapper.MedicineMapper;
 import com.medicine.Query.MedicineQuery;
 import com.medicine.Util.JDBCHelper;
 
 import java.util.List;
 
-public class MedicineMapperImp implements medicineMapper {
+public class MedicineMapperImp implements MedicineMapper {
     private static final JDBCHelper jdbc = new JDBCHelper();
 
     public static void main(String[] args) {
         Medicine m = new Medicine();
         m.setMedicineNo("abc001");
-        medicineMapper mm = new MedicineMapperImp();
+        MedicineMapper mm = new MedicineMapperImp();
 //        for (Medicine med : mm.select(m)) {
 //            System.out.println(med);
 //        }
@@ -63,6 +63,13 @@ public class MedicineMapperImp implements medicineMapper {
     }
 
     @Override
+    public List<Medicine> selectByMedicineName(Medicine m) {
+        String sql = "SELECT * FROM medicine where medicineName=?";
+        String[] values = new String[]{m.getName()};
+        return jdbc.select(sql, values, Medicine.class);
+    }
+
+    @Override
     public List<Medicine> selectAll() {
         String sql = "SELECT * FROM medicine";
 //        String[] values = new String[]{m.getMedicineNo()};
@@ -72,40 +79,60 @@ public class MedicineMapperImp implements medicineMapper {
     @Override
     public List<Medicine> fuzzySelect(String key) {
         String sql = "SELECT * FROM medicine " +
-                "WHERE id LIKE %"+key+"% " +
-                "OR medicineNO LIKE %"+key+"% " +
-                "OR name LIKE %"+key+"% " +
-                "OR factoryAddress LIKE %"+key+"% " +
-                "OR description LIKE %"+key+"% " +
-                "OR price LIKE %"+key+"% " +
-                "OR expire LIKE %"+key+"% " +
-                "OR unit LIKE %"+key+"% " +
-                "OR number LIKE %"+key+"% " +
-                "OR categoryId LIKE %"+key+"% " +
-                "OR deleted LIKE %"+key+"% " ;
-        return jdbc.select(sql,null, Medicine.class);
+                "WHERE id LIKE %" + key + "% " +
+                "OR medicineNO LIKE %" + key + "% " +
+                "OR name LIKE %" + key + "% " +
+                "OR factoryAddress LIKE %" + key + "% " +
+                "OR description LIKE %" + key + "% " +
+                "OR price LIKE %" + key + "% " +
+                "OR expire LIKE %" + key + "% " +
+                "OR unit LIKE %" + key + "% " +
+                "OR number LIKE %" + key + "% " +
+                "OR categoryId LIKE %" + key + "% " +
+                "OR deleted LIKE %" + key + "% ";
+        return jdbc.select(sql, null, Medicine.class);
     }
 
+    @Override
+    public List<Medicine> selectByMedicinePrice(MedicineQuery m) {
+        String sql = "select * from medicine where price bewteen ? and ?";
+        String[] values = new String[]{m.getMedicineMinPrice(), m.getMedicineMaxPrice()};
+        return jdbc.select(sql, values, Medicine.class);
+    }
 
     @Override
-    public String getSQLFromMedicineQuery(MedicineQuery query) {
+    public List<Medicine> selectByMedicinetype(MedicineQuery m) {
+        String sql = "select * from category,medicine where id = ? and category.id=medicine.categoryId";
+        String[] values = new String[]{m.getCategoryId()};
+        return jdbc.select(sql, values, Medicine.class);
+    }
+
+    @Override
+    public List<Medicine> selectByMedicineDate(MedicineQuery m) {
+        String sql = "select * from medicine where expire=?";
+        String[] values = new String[]{m.getDatePick()};
+        return jdbc.select(sql, values, Medicine.class);
+    }
+
+    @Override
+    public String getSqlMedicineQuery(MedicineQuery query) {
         StringBuilder sql = new StringBuilder("SELECT * FROM medicine WHERE deleted = 0");
         if (query == null) return sql.toString();
 
-        if (query.getMedicineNameStr()!=null) {
-            sql.append(" AND `name` LIKE \"%" + query.getMedicineNameStr() + "%\"");
+        if (query.getMedicineName() != null) {
+            sql.append(" AND `name` LIKE \"%" + query.getMedicineName() + "%\"");
         }
 
-        if (query.getMedicineMinPriceStr() != null){
-            sql.append(" AND price >= " + query.getMedicineMinPriceStr());
+        if (query.getMedicineMinPrice() != null){
+            sql.append(" AND price >= " + query.getMedicineMinPrice());
         }
 
-        if (query.getMedicineMaxPriceStr() != null){
-            sql.append(" AND price <= " + query.getMedicineMaxPriceStr());
+        if (query.getMedicineMaxPrice() != null){
+            sql.append(" AND price <= " + query.getMedicineMaxPrice());
         }
 
-        if (query.getDatePickStr() != null){
-            sql.append(" AND expire <= \"" + query.getDatePickStr() + "\"");
+        if (query.getDatePick() != null){
+            sql.append(" AND expire <= \"" + query.getDatePick() + "\"");
         }
 
         if (query.getCategoryId() != null){
@@ -115,8 +142,10 @@ public class MedicineMapperImp implements medicineMapper {
         return sql.toString();
     }
 
-    public List<Medicine> search(MedicineQuery query) {
-        String sql = getSQLFromMedicineQuery(query);
-        return jdbc.select(sql, null, Medicine.class);
+    @Override
+    public List<Medicine> search(MedicineQuery medicineQuery) {
+        MedicineMapper mm = new MedicineMapperImp();
+        String sql = mm.getSqlMedicineQuery(medicineQuery);
+        return jdbc.select(sql,null,Medicine.class);
     }
 }

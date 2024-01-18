@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="MedicineFrame" type="Application" factoryName="Application">
+  <configuration default="false" name="药品" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="com.medicine.UI.medicine.MedicineFrame" />
     <module name="MEDICINE" />
     <method v="2">

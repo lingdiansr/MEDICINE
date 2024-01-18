@@ -3,7 +3,7 @@ import com.medicine.Entity.User;
 
 import java.util.List;
 
-public interface userMapper {
+public interface UserMapper {
     boolean insert(User u);
     boolean delete(User u);
     boolean update(User u);

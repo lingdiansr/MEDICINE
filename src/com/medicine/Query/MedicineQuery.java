@@ -1,52 +1,62 @@
 package com.medicine.Query;
 
-import com.medicine.Entity.Medicine;
-
 public class MedicineQuery {
-    private String medicineNameStr;
-    private String medicineMinPriceStr;
-    private String medicineMaxPriceStr;
+    private String medicineName;
+    private String medicineMinPrice;
+    private String medicineMaxPrice;
     private String categoryId;
-    private String datePickStr;
+    private String datePick;
 
 
-    public MedicineQuery(String medicineNameStr, String medicineMinPriceStr, String medicineMaxPriceStr, String categoryId, String datePickStr) {
-        this.medicineNameStr = medicineNameStr;
-        this.medicineMinPriceStr = medicineMinPriceStr;
-        this.medicineMaxPriceStr = medicineMaxPriceStr;
+    public MedicineQuery(String medicineName, String medicineMinPrice, String medicineMaxPrice, String categoryId, String datePick) {
+        this.medicineName = medicineName;
+        this.medicineMinPrice = medicineMinPrice;
+        this.medicineMaxPrice = medicineMaxPrice;
         this.categoryId = categoryId;
-        this.datePickStr = datePickStr;
+        this.datePick = datePick;
     }
 
     public MedicineQuery() {
     }
 
     public static MedicineQuery from(String medicineNameStr, String medicineMinPriceStr, String medicineMaxPriceStr, String categoryId, String datePickStr) {
+       if (categoryId.equals("-1")){
+           categoryId=null;
+       }
+       if (medicineNameStr.equals("")){
+           medicineNameStr=null;
+       }
+       if (medicineMinPriceStr.equals("")){
+           medicineMinPriceStr=null;
+       }
+       if (medicineMaxPriceStr.equals("")){
+           medicineMaxPriceStr=null;
+       }
         return new MedicineQuery(medicineNameStr,medicineMinPriceStr,medicineMaxPriceStr,categoryId,datePickStr);
     }
 
-    public String getMedicineNameStr() {
-        return medicineNameStr;
+    public String getMedicineName() {
+        return medicineName;
     }
 
-    public void setMedicineNameStr(String medicineNameStr) {
-        this.medicineNameStr = medicineNameStr;
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
     }
 
-    public String getMedicineMinPriceStr() {
-        return medicineMinPriceStr;
+    public String getMedicineMinPrice() {
+        return medicineMinPrice;
     }
 
-    public void setMedicineMinPriceStr(String medicineMinPriceStr) {
-        this.medicineMinPriceStr = medicineMinPriceStr;
+    public void setMedicineMinPrice(String medicineMinPrice) {
+        this.medicineMinPrice = medicineMinPrice;
     }
 
-    public String getMedicineMaxPriceStr() {
-        return medicineMaxPriceStr;
+    public String getMedicineMaxPrice() {
+        return medicineMaxPrice;
     }
 
-    public void setMedicineMaxPriceStr(String medicineMaxPriceStr) {
-        this.medicineMaxPriceStr = medicineMaxPriceStr;
+    public void setMedicineMaxPrice(String medicineMaxPrice) {
+        this.medicineMaxPrice = medicineMaxPrice;
     }
 
     public String getCategoryId() {
@@ -57,12 +67,12 @@ public class MedicineQuery {
         this.categoryId = categoryId;
     }
 
-    public String getDatePickStr() {
-        return datePickStr;
+    public String getDatePick() {
+        return datePick;
     }
 
-    public void setDatePickStr(String datePickStr) {
-        this.datePickStr = datePickStr;
+    public void setDatePick(String datePick) {
+        this.datePick = datePick;
     }
 
 }

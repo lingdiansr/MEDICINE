@@ -3,15 +3,20 @@ package com.medicine.UI.medicine;
 import com.eltima.components.ui.DatePicker;
 import com.medicine.Entity.Category;
 import com.medicine.Entity.Medicine;
+import com.medicine.Mapper.CategoryMapper;
+import com.medicine.Mapper.MedicineMapper;
+import com.medicine.Mapper.imp.CategoryMapperImp;
+import com.medicine.Mapper.imp.MedicineMapperImp;
+import com.medicine.Query.MedicineQuery;
 import com.medicine.UI.base.UIConstants;
 import com.medicine.UI.base.UIConverter;
-import com.medicine.Query.MedicineQuery;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -75,6 +80,10 @@ public class MedicineFrame extends JFrame {
         initFrame();
         medicineButtonListener();
         tableDataSelectedListener();
+    }
+
+    public static void main(String[] args) {
+        new MedicineFrame();
     }
 
     private void initFrame() {
@@ -153,11 +162,15 @@ public class MedicineFrame extends JFrame {
         downPanel.add(refreshMedicine);
     }
 
-
     public JComboBox<Category> initCategoryData(boolean isSearch) {
         JComboBox<Category> target = new JComboBox<>();
         target.setFont(new Font(UIConstants.FONT_NAME_SONG, Font.PLAIN, 12));
         // todo 对类别进行赋值
+        target.addItem(new Category(-1, "所有类别", ""));
+        CategoryMapper mp = new CategoryMapperImp();
+        for (Category c : mp.selectAll()) {
+            target.addItem(c);
+        }
         return target;
     }
 
@@ -169,7 +182,6 @@ public class MedicineFrame extends JFrame {
             return Date.from(threeYearsLater.atStartOfDay(ZoneId.systemDefault()).toInstant());
         }
     }
-
 
     private void medicineButtonListener() {
         // 1.监听查询按钮
@@ -188,6 +200,38 @@ public class MedicineFrame extends JFrame {
                 JOptionPane.showMessageDialog(MedicineFrame.this, "请先选择要修改的数据");
             } else {
                 // todo 获取到当前药品对象，打开新的弹框
+                // 获取表格中的一行数据
+                int selectedRow = table.getSelectedRow();
+                int id = Integer.parseInt((String) table.getValueAt(selectedRow, UIConstants.MEDICINE_ID));
+                String medicineNo = (String) table.getValueAt(selectedRow, 1);
+                String name = (String) table.getValueAt(selectedRow, 2);
+                String factoryAddress = (String) table.getValueAt(selectedRow, 4);
+                String description = (String) table.getValueAt(selectedRow, 3);
+                double price = Double.parseDouble((String) table.getValueAt(selectedRow, 7));
+                Date expire = null;
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    expire = dateFormat.parse((String) table.getValueAt(selectedRow, 5));
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                String unit = (String) table.getValueAt(selectedRow, 8);
+                int number = Integer.parseInt((String) table.getValueAt(selectedRow, 6));
+                Object value = table.getValueAt(selectedRow, 9);
+                int categoryId;
+
+                if (value instanceof Integer) {
+                    categoryId = (int) value;
+                } else {
+                    // Handle the non-integer value, for example, show an error message or set a default value
+                    categoryId = -1;  // Set a default value or handle the non-integer value based on your application's requirements
+                }
+                int deleted = 0;
+
+                // 封装成Medicine对象
+                Medicine medicine = new Medicine(id, medicineNo, name, factoryAddress, description, price, expire, unit, number, categoryId, deleted);
+//                new ModifyMedicineFrame(MedicineFrame.this, true, medicine);
+                System.out.println(medicine);
             }
         });
 
@@ -221,10 +265,7 @@ public class MedicineFrame extends JFrame {
         if (Objects.equals(selectedMedicineId, UIConstants.SELECTED_ID)) {
             JOptionPane.showMessageDialog(this, "请选择需要删除的药品数据!");
         } else {
-            int choose = JOptionPane.showConfirmDialog(this,
-                    "您确认要删除该条记录？",
-                    "药品删除",
-                    JOptionPane.YES_NO_OPTION);
+            int choose = JOptionPane.showConfirmDialog(this, "您确认要删除该条记录？", "药品删除", JOptionPane.YES_NO_OPTION);
 
             if (choose == JOptionPane.YES_OPTION) {
                 // todo 删除逻辑
@@ -239,14 +280,13 @@ public class MedicineFrame extends JFrame {
     }
 
     private void hideMedicineId() {
-//        if (table != null) {
-//            // 隐藏 药品主键Id
-//            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setMinWidth(0);
-//            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setMaxWidth(0);
-//            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setPreferredWidth(0);
-//        }
+        if (table != null) {
+            // 隐藏 药品主键Id
+            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setMinWidth(0);
+            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setMaxWidth(0);
+            table.getColumnModel().getColumn(UIConstants.MEDICINE_ID).setPreferredWidth(0);
+        }
     }
-
 
     private void loadTableData() {
         if (tableModel != null) {
@@ -254,36 +294,31 @@ public class MedicineFrame extends JFrame {
         }
         // todo 查询药品列表
         MedicineQuery medicineQuery = getMedicineQuery();
-        Medicine[] medicines = medicineQuery.executeQuety();
-        // todo 查询分类列表
+        MedicineMapper medicineMapper = new MedicineMapperImp();
+        CategoryMapper categoryMapper = new CategoryMapperImp();
 
+        List<Medicine> medicines = medicineMapper.search(medicineQuery);
+        List<Category> categories = categoryMapper.selectAll();
         // 赋值给tablemodel
-//        tableModel = UIConverter.getMedicineData(medicines, categories);
+        tableModel = UIConverter.getMedicineData(medicines, categories);
     }
 
     private MedicineQuery getMedicineQuery() {
         // TODO 一些过滤条件 , 价格的简单判断
         String medicineNameStr = this.medicineName.getText();
-        String medicineMinPriceStr= this.medicineMinPrice.getText();
-        String medicineMaxPriceStr=this.medicineMaxPrice.getText();
-        String categoryId= (String) this.medicineCategory.getSelectedItem();
+        String medicineMinPriceStr = this.medicineMinPrice.getText();
+        String medicineMaxPriceStr = this.medicineMaxPrice.getText();
+        String categoryId = String.valueOf(((Category) this.medicineCategory.getSelectedItem()).getId());
         String datePickStr = this.datePick.getText();
-
-
-        return MedicineQuery.from(medicineNameStr, medicineMinPriceStr, medicineMaxPriceStr,categoryId, datePickStr);
-//        return null;
+        return MedicineQuery.from(medicineNameStr, medicineMinPriceStr, medicineMaxPriceStr, categoryId, datePickStr);
     }
 
     private void clearMedicineQuery() {
         // todo 清除查询条件
-        medicineName=UIConverter.initTextField();
-        medicineMinPrice=UIConverter.initTextField();
-        medicineMaxPrice=UIConverter.initTextField();
-        medicineCategory=initCategoryData(true);
-        datePick=UIConverter.getDatePicker(dealDate(true));
-    }
-
-    public static void main(String[] args) {
-        new MedicineFrame();
+        medicineName = UIConverter.initTextField();
+        medicineMinPrice = UIConverter.initTextField();
+        medicineMaxPrice = UIConverter.initTextField();
+        medicineCategory = initCategoryData(true);
+        datePick = UIConverter.getDatePicker(dealDate(true));
     }
 }
