@@ -111,7 +111,7 @@ public class shop extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==backButton){
             this.dispose();
-            new MedicineFrame();
+//            new MedicineFrame();
         }
     }
     public void addMedicineToTable( String name,String description,double price,int categoryId) {

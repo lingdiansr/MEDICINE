@@ -380,11 +380,13 @@ public class MedicineFrame extends JFrame {
         shopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                new shop();
                 Medicine selectedMedicine = getSelectedMedicine();
                 if (selectedMedicine != null) {
                     // 将选中的药品信息添加到表格中
                     tableModel.addRow(new Object[]{selectedMedicine.getName(), selectedMedicine.getDescription(), selectedMedicine.getPrice(), selectedMedicine.getCategoryId()});
                 }
+
             }
         });
 

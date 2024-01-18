@@ -39,6 +39,8 @@ public class UserFrameListener implements ActionListener {
                     if (Objects.equals(password, u.getPassword())) {
                         JOptionPane.showMessageDialog(uf, "登录成功", "成功", JOptionPane.INFORMATION_MESSAGE);
                         new MedicineFrame();
+                        uf.dispose();
+
                     } else {
                         JOptionPane.showMessageDialog(uf, "用户名或密码错误", "错误", JOptionPane.ERROR_MESSAGE);
                     }
