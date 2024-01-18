@@ -14,6 +14,8 @@ import com.medicine.UI.base.UIConverter;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
@@ -63,6 +65,9 @@ public class MedicineFrame extends JFrame {
     private JButton modifyMedicine;
     private JButton removeMedicine;
     private JButton refreshMedicine;
+
+    private JButton addshopButton;
+    private JButton shopButton;
     // downPanel -> END <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     // ↓        ↓       ↓        ↓       ↓        ↓       ↓        ↓       ↓
@@ -147,6 +152,7 @@ public class MedicineFrame extends JFrame {
 
         midPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
+
     }
 
     private void downPanel() {
@@ -155,11 +161,17 @@ public class MedicineFrame extends JFrame {
         removeMedicine = UIConverter.initButton("删除");
         refreshMedicine = UIConverter.initButton("刷新");
 
+        addshopButton=UIConverter.initButton("加入购物车");
+        shopButton = UIConverter.initButton("购物车");
+
         downPanel = new JPanel();
         downPanel.add(addMedicine);
         downPanel.add(modifyMedicine);
         downPanel.add(removeMedicine);
         downPanel.add(refreshMedicine);
+
+        downPanel.add(addshopButton);
+        downPanel.add(shopButton);
     }
 
     public JComboBox<Category> initCategoryData(boolean isSearch) {
@@ -225,6 +237,9 @@ public class MedicineFrame extends JFrame {
 
         // 5.监听刷新按钮
         refreshMedicine.addActionListener(ae -> refreshButtonListener());
+
+        addshopButton.addActionListener(ae->addshopListener());
+        shopButton.addActionListener(ae->shopListener());
     }
 
     private void tableDataSelectedListener() {
@@ -326,4 +341,66 @@ public class MedicineFrame extends JFrame {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         datePick.getInnerTextField().setText(dateFormat.format(dealDate(true)));
     }
+
+    private void addshopListener(){
+        addshopButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (Objects.equals(selectedMedicineId, UIConstants.SELECTED_ID)) {
+                    JOptionPane.showMessageDialog(MedicineFrame.this, "请先选择要添加的数据");
+                } else {
+                    // todo 获取到当前药品对象，打开新的弹框
+                    // 获取表格中的一行数据
+                    int selectedRow = table.getSelectedRow();
+//                    int id = Integer.parseInt((String) table.getValueAt(selectedRow, UIConstants.MEDICINE_ID));
+//                    String medicineNo = (String) table.getValueAt(selectedRow, 1);
+                    String name = (String) table.getValueAt(selectedRow, 2);
+//                    String factoryAddress = (String) table.getValueAt(selectedRow, 4);
+                    String description = (String) table.getValueAt(selectedRow, 3);
+                    double price = Double.parseDouble((String) table.getValueAt(selectedRow, 7));
+//                    String expire = (String) table.getValueAt(selectedRow, 5);
+//                    String unit = (String) table.getValueAt(selectedRow, 8);
+//                    int number = Integer.parseInt((String) table.getValueAt(selectedRow, 6));
+                    CategoryMapper cp = new CategoryMapperImp();
+                    int categoryId = cp.selectIdByName((String) table.getValueAt(selectedRow, 9)).get(0).getId();
+//                    int deleted = 0;
+
+                    // 封装成Medicine对象
+                    Medicine medicine = new Medicine(name, description, price, categoryId);
+                    System.out.println(medicine);
+                    shop s = new shop();
+                    s.addMedicineToTable(name, description, price, categoryId);
+//                    new ModifyMedicineFrame(MedicineFrame.this, true, medicine);
+                }
+            }
+        });
+
+    }
+    private void shopListener(){
+        shopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Medicine selectedMedicine = getSelectedMedicine();
+                if (selectedMedicine != null) {
+                    // 将选中的药品信息添加到表格中
+                    tableModel.addRow(new Object[]{selectedMedicine.getName(), selectedMedicine.getDescription(), selectedMedicine.getPrice(), selectedMedicine.getCategoryId()});
+                }
+            }
+        });
+
+    }
+    public Medicine getSelectedMedicine() {
+        int selectedRow = table.getSelectedRow();
+        if (selectedRow != -1) {
+            String medicineName = table.getValueAt(selectedRow, 0).toString();
+            String medicineDescription = table.getValueAt(selectedRow, 1).toString();
+            double medicineprice = (double) table.getValueAt(selectedRow, 2);
+            int medicineCategoryId = (int) table.getValueAt(selectedRow, 3);
+
+            return new Medicine(medicineName, medicineDescription,medicineprice,medicineCategoryId);
+        } else {
+            return null;
+        }
+    }
+
 }
