@@ -2,12 +2,16 @@ package com.medicine.UI.medicine;
 
 import com.eltima.components.ui.DatePicker;
 import com.medicine.Entity.Category;
+import com.medicine.Entity.Medicine;
+import com.medicine.Mapper.MedicineMapper;
+import com.medicine.Mapper.imp.MedicineMapperImp;
 import com.medicine.UI.base.UIConstants;
 import com.medicine.UI.base.UIConverter;
 
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class AddMedicineFrame extends JDialog {
@@ -164,7 +168,24 @@ public class AddMedicineFrame extends JDialog {
         // 药品价格
         // 药品单位
         // 药品类别
-
+        Medicine medicine = new Medicine();
+        medicine.setMedicineNo(medicineNo.getText());
+        medicine.setDescription(medicineDescription.getText());
+        medicine.setName(medicineName.getText());
+        medicine.setFactoryAddress(medicineFactoryAddress.getText());
+        medicine.setNumber(Integer.parseInt(medicineNumber.getText()));
+        medicine.setPrice(Double.valueOf(medicinePrice.getText()));
+        medicine.setUnit(medicineUnit.getText());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        medicine.setExpire();
+        medicine.setExpire(datePick.getText());
+        medicine.setCategoryId((((Category)medicineCategory.getSelectedItem())).getId());
+        MedicineMapper mm =new MedicineMapperImp();
+        if (mm.insert(medicine)){
+            JOptionPane.showMessageDialog(this, "添加成功", "成功", JOptionPane.INFORMATION_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(this, "添加失败", "错误", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 }
