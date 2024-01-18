@@ -89,7 +89,7 @@ public class UserFrame extends JFrame {
         panel.add(loginButton);
         panel.add(registerButton);
 
-        ImageIcon backgroundImage = new ImageIcon("D:\\school\\Java-class\\MEDICINE\\src\\com\\medicine\\picture\\yyyy.png");
+        ImageIcon backgroundImage = new ImageIcon("src\\com\\medicine\\picture\\yyyy.png");
         JLabel backgroundLabel = new JLabel(backgroundImage);
         backgroundLabel.setLayout(new BorderLayout());
         backgroundLabel.setOpaque(true);
