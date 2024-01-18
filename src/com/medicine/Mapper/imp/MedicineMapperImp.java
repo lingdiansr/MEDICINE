@@ -1,6 +1,5 @@
 package com.medicine.Mapper.imp;
 
-import com.medicine.Entity.Category;
 import com.medicine.Entity.Medicine;
 import com.medicine.Mapper.medicineMapper;
 import com.medicine.Query.MedicineQuery;
@@ -64,13 +63,6 @@ public class MedicineMapperImp implements medicineMapper {
     }
 
     @Override
-    public List<Medicine> selectByMedicineName(Medicine m) {
-        String sql = "SELECT * FROM medicine where medicineName=?";
-        String[] values = new String[]{m.getName()};
-        return jdbc.select(sql, values, Medicine.class);
-    }
-
-    @Override
     public List<Medicine> selectAll() {
         String sql = "SELECT * FROM medicine";
 //        String[] values = new String[]{m.getMedicineNo()};
@@ -94,24 +86,37 @@ public class MedicineMapperImp implements medicineMapper {
         return jdbc.select(sql,null, Medicine.class);
     }
 
-    @Override
-    public List<Medicine> selectByMedicinePrice(MedicineQuery m) {
-        String sql = "select * from medicine where price bewteen ? and ?";
-        String[] values = new String[]{m.getMedicineMinPriceStr(),m.getMedicineMaxPriceStr()};
-        return jdbc.select(sql,values,Medicine.class);
-    }
 
     @Override
-    public List<Medicine> selectByMedicinetype(MedicineQuery m) {
-        String sql = "select * from category,medicine where id = ? and category.id=medicine.categoryId";
-        String[] values = new String[]{m.getCategoryId()};
-        return jdbc.select(sql,values,Medicine.class);
+    public String getSQLFromMedicineQuery(MedicineQuery query) {
+        StringBuilder sql = new StringBuilder("SELECT * FROM medicine WHERE deleted = 0");
+        if (query == null) return sql.toString();
+
+        if (query.getMedicineNameStr()!=null) {
+            sql.append(" AND `name` LIKE \"%" + query.getMedicineNameStr() + "%\"");
+        }
+
+        if (query.getMedicineMinPriceStr() != null){
+            sql.append(" AND price >= " + query.getMedicineMinPriceStr());
+        }
+
+        if (query.getMedicineMaxPriceStr() != null){
+            sql.append(" AND price <= " + query.getMedicineMaxPriceStr());
+        }
+
+        if (query.getDatePickStr() != null){
+            sql.append(" AND expire <= \"" + query.getDatePickStr() + "\"");
+        }
+
+        if (query.getCategoryId() != null){
+            sql.append(" AND categoryId = " + query.getCategoryId());
+        }
+
+        return sql.toString();
     }
 
-    @Override
-    public List<Medicine> selectByMedicineDate(MedicineQuery m) {
-        String sql ="select * from medicine where expire=?";
-        String[] values = new String[]{m.getDatePickStr()};
-        return jdbc.select(sql,values,Medicine.class);
+    public List<Medicine> search(MedicineQuery query) {
+        String sql = getSQLFromMedicineQuery(query);
+        return jdbc.select(sql, null, Medicine.class);
     }
 }
