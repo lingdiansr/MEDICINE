@@ -14,6 +14,7 @@ import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class ModifyMedicineFrame extends JDialog {
 
@@ -186,12 +187,12 @@ public class ModifyMedicineFrame extends JDialog {
         medicine.setName(medicineName.getText());
         medicine.setFactoryAddress(medicineFactoryAddress.getText());
         medicine.setNumber(Integer.parseInt(medicineNumber.getText()));
-        medicine.setPrice(Double.valueOf(medicinePrice.getText()));
+        medicine.setPrice(Double.parseDouble(medicinePrice.getText()));
         medicine.setUnit(medicineUnit.getText());
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        medicine.setExpire();
         medicine.setExpire(datePick.getText());
-        medicine.setCategoryId((((Category) medicineCategory.getSelectedItem())).getId());
+        medicine.setCategoryId((((Category) Objects.requireNonNull(medicineCategory.getSelectedItem()))).getId());
         MedicineMapper mm = new MedicineMapperImp();
         if (medicine.getCategoryId() != -1 && mm.update(medicine)) {
             JOptionPane.showMessageDialog(this, "修改成功", "成功", JOptionPane.INFORMATION_MESSAGE);
