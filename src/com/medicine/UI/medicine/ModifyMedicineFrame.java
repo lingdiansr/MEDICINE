@@ -191,11 +191,11 @@ public class ModifyMedicineFrame extends JDialog {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        medicine.setExpire();
         medicine.setExpire(datePick.getText());
-        medicine.setCategoryId((((Category)medicineCategory.getSelectedItem())).getId());
-        MedicineMapper mm =new MedicineMapperImp();
-        if (mm.update(medicine)){
+        medicine.setCategoryId((((Category) medicineCategory.getSelectedItem())).getId());
+        MedicineMapper mm = new MedicineMapperImp();
+        if (medicine.getCategoryId() != -1 && mm.update(medicine)) {
             JOptionPane.showMessageDialog(this, "修改成功", "成功", JOptionPane.INFORMATION_MESSAGE);
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "修改失败", "错误", JOptionPane.ERROR_MESSAGE);
         }
     }
